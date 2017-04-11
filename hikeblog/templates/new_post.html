@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="blog-main col-lg-12">
+	<form class="blog-post-create" action="" method="post" name="add_locality">
+
+		{{form.hidden_tag()}}
+		<div class="form-group {% if form.title.errors %} has-error {% endif %}">
+		<label class="control-label" for="title">{{form.title.label }}</label>
+		{{ form.title(class="form-control form-font") }}
+		</div>
+
+		<div class="form-group {% if form.body.errors %} has-error {% endif %}">
+			<label class="control-label" for="body">{{form.body.label }}</label>
+			{{ form.body(class="form-control form-font", rows='10') }}
+		</div>
+		<div class="form-group {% if form.tags.errors %} has-error {% endif %}">
+			<label class="control-label" for="body">{{form.tags.label }} (comma-separated)</label>
+			{{ form.tags(class="form-control form-font select2") }}
+		</div>
+			<div class="blog-form-buttons">
+				<button type="submit" class="btn btn-primary form-font">Save</button>
+			</div>
+	</form>
+</div>  <!-- /.block-main -->
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>{{page_title}}</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='select2-bootstrap.css')}}"> 
+
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+
+
+<link href="{{ url_for('recent_feed') }}"
+	rel="alternate"
+	title="Recent Posts" 
+	type="application/atom+xml">
+</head>
+<body>
+
+<header class="blog-head">
+	<div class="container">
+		<nav class="blog-nav">
+			<a class="blog-nav-item active" href="{{url_for('mainpage')}}">Home</a>
+			<a class="blog-nav-item" href="#">Blog</a>
+			<a class="blog-nav-item" href="#">Archive</a>			
+			<a class="blog-nav-item" href="#">About</a>			
+			<a class="btn btn-default" href="/posts/new" role="button">Create New Post</a>
+		</nav>
+	</div>
+</header>
+<div class="container">
+	{% with messages = get_flashed_messages(with_categories=true) %}
+		{% if messages %}
+			{% for category, message in messages%}
+				<div class="alert {{ category}}" role="alert"> {{message}} </div>
+            {% endfor %}
+		{% endif %}
+	{% endwith %}
+</div> 
+
+<div class="container">
+	<div class="blog-header">
+		<h1 class="blog-title">Korvinification</h1>
+		<p class="blog-description">Hiking in photos.</p>
+	</div>
+	<div class="row">
+        {% block body %}
+        {% endblock %}
+	</div><!-- /. row -->
+</div> <!-- /.container -->
+    
+	<footer class="blog-footer">
+		<p class="text-muted text-center">&copy; 2017 sugataua</p>		
+	</footer>
+
+
+	<script type="text/javascript">
+	 
+	  $('select').select2({
+		theme: "bootstrap",
+		tags: true,
+		placeholder: "Select tags",
+		tokenSeparators: [','],
+		width: '100%'
+	  });
+	</script>
+</body>	
